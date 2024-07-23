@@ -4,7 +4,7 @@ const generateMarkdown = require("./utils/generateMarkdown")
 console.log("Initializing questions...");
 console.log("Questions loaded! Press CTRL^C at any time to cancel!")
 
-// TODO: Create an array of questions for user input
+// Array of questions for the prompt generator to run through.
 const questions = [
   {type: "input",
     name: "title",
@@ -21,6 +21,7 @@ const questions = [
     type: "input",
     name: "installation",
     message: "What are the steps for installation?",
+    default: "N/A"
   },
 
   {
@@ -35,6 +36,7 @@ const questions = [
     message:
       "Did you work with anyone or otherwise use net assets needing citation? (Y/N)",
   },
+  //  If creditConfirm response is a confirm, displays the 'Credits' question, otherwise moves on.
   {when: answers => {
     return answers.creditConfirm;
   }, 
@@ -46,7 +48,7 @@ const questions = [
 
 
   {
-    type: "List",
+    type: "list",
     name: "License",
     message: "Please pick a license:",
     choices: ["MIT License", "GNU GPLv3", "Apache License 2.0", "BSD 3-Clause", "CC0 (Creative Commons)"],
@@ -64,7 +66,7 @@ const questions = [
 },
 ];
 
-// TODO: Create a function to write README file
+// Creates a README file using data from answers.
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, data, err => {
     if (err) {
@@ -74,17 +76,18 @@ function writeToFile(fileName, data) {
   })
 }
 
-// TODO: Create a function to initialize app
+// Initializes the app based on information from 
 function init() {
   try {
     const promptResponse = inquirer.prompt(questions);
     generateMarkdown(promptResponse);
 
-    writeToFile("./README.MD", generateMarkdown)
+    writeToFile("./README.md", generateMarkdown)
   }
 catch (error) {
   console.error();
 }
+  console.log("README successfully generated!")
 
 };
   
