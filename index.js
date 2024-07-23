@@ -27,7 +27,7 @@ const questions = [
   {
     type: "input",
     name: "usage",
-    messsge: "How do you use your application?",
+    message: "How do you use your application?",
   },
 
   {
@@ -37,15 +37,12 @@ const questions = [
       "Did you work with anyone or otherwise use net assets needing citation? (Y/N)",
   },
   //  If creditConfirm response is a confirm, displays the 'Credits' question, otherwise moves on.
-  {when: answers => {
-    return answers.creditConfirm;
-  }, 
+  { when: answers => answers.creditConfirm,
     type: "input",
-    name: "Credits",
+    name: "credits",
     message: "Please list your credits:",
     default: "N/A"
   },
-
 
   {
     type: "list",
@@ -76,18 +73,24 @@ function writeToFile(fileName, data) {
   })
 }
 
-// Initializes the app based on information from 
-function init() {
+// Initializes the app based on information from prompt answers
+async function init() {
   try {
-    const promptResponse = inquirer.prompt(questions);
-    generateMarkdown(promptResponse);
+    const promptResponse = await inquirer.prompt(questions);
+    if (promptResponse.credits === null || "No") {
+      promptResponse.credits = "N/A"
+    };
+    let markdown = generateMarkdown(promptResponse);
 
-    writeToFile("./README.md", generateMarkdown)
+    console.log(markdown);
+
+    writeToFile("./README.md", markdown)
+    console.log("README successfully generated!")
   }
 catch (error) {
-  console.error();
+  console.error(error);
 }
-  console.log("README successfully generated!")
+
 
 };
   

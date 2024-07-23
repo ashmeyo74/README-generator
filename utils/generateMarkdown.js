@@ -2,8 +2,8 @@
 // Returns badge based on user selection. f there is no license, return an empty string
 function renderLicenseBadge(license) {
   if (!license) {
-    return '';
-  } else if(license === "MIT LIcense") {
+    return ' ';
+  } else if(license === "MIT License") {
     return badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
 
   } else if(license === "GNU GPLv3") {
@@ -25,8 +25,8 @@ function renderLicenseBadge(license) {
 // Returns license link based on user selection. f there is no license, return an empty string
 function renderLicenseLink(license) {
   if (!license) {
-    return '';
-  } else if(license === "MIT LIcense") {
+    return ' ';
+  } else if(license === "MIT License") {
     return link = "[License: MIT](https://opensource.org/licenses/MIT)";
 
   } else if(license === "GNU GPLv3") {
@@ -47,20 +47,24 @@ function renderLicenseLink(license) {
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  `${renderLicenseBadge(license)} \n
-  See License: ${renderLicenseLink(license)}`
-}
+  if (!license) {
+    return ''
+  } else {
+    return `${renderLicenseBadge(license)} \n
+    See License: ${renderLicenseLink(license)}`
+  }
+  }
+
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `# ${data.title}
-  # ${promptResponse.title}
 \n
 \n
 
   ## Description
 \n
-${promptResponse.description}
+${data.description}
   \n
   \n
 
@@ -76,29 +80,29 @@ ${promptResponse.description}
 
   ## Installation
   \n
-  ${promptResponse.installation}
+  ${data.installation}
   \n
   \n
 
 ## Usage
 \n
-${promptResponse.usage}
+${data.usage}
   \n
   \n
 
 ## Credits
 \n
-${Credits}
+${data.credits}
 
 ## License
-${renderLicenseSection(promptResponse.License)}
+${renderLicenseSection(data.License)}
 
 \n
 
 ## Questions
-Have any questions about this project? You can reach the author under the following:
-[github.com/${promptResponse.Username}](github.com/${promptResponse.Username})
-Email: ${promptResponse.Email}
+Have any questions about this project? You can reach the author under the following: \n
+[github.com/${data.Username}](github.com/${data.Username})\n
+**Email:** ${data.Email}
 `;
 }
 
