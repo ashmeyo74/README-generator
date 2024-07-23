@@ -45,7 +45,8 @@ The README generator creates a responsive prompt generator that allows the user 
 To use the README generator, please begin the process by typing 'node index.js' into your terminal. This will begin the prompt, where you may type and press 'Enter' when finished with your answer to move onto the next. Yes/No questions can be answered with (Y/N). <br>The following questions will be asked: <br>*What's the name of your project? <br>*Please describe your project. (Motivation, why it was built, what you learned, etc.) <br>*What are the steps for installation? (Optional) <br>*How do you use your application? <br>*Did you work with anyone or otherwise use net assets needing citation? (Optional) <br>*Please pick a license. <br>*Please enter your GitHub username. No @ is needed. <br>*Please enter your email.
   
 
-  
+
+[You can view the video demonstration here](https://drive.google.com/file/d/1TYeKUE5-AvBanETPAJ3OKANIX2Jd9PjI/view?usp=sharing)
 
 
 ## Credits
